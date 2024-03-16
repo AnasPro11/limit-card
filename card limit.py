@@ -27,7 +27,7 @@ for line in logo.splitlines():
     print(line)
     time.sleep(0.1)
 
-correct_password = "password123"
+correct_password = "anaspro7"
 
 while True:
     password_attempt = input("\033[1;32mEnter password \033[1;34m:\033[1;39m ")

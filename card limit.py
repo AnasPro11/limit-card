@@ -95,7 +95,11 @@ else:
 hd2={'Host':'web.vodafone.com.eg','Connection':'keep-alive','Pragma':'no-cache','Cache-Control':'no-cache','msisdn':number,'api-host':'PromotionHost','Accept-Language':'AR','Authorization':'Bearer '+token,'Content-Type':'application/json','Accept':'application/json','clientId':'WebsiteConsumer','User-Agent':'Mozilla/5.0 (Linux; Android 9; SM-J610F Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.73 Mobile Safari/537.36','channel':'WEB','X-Requested-With':'com.emeint.android.myservices','Sec-Fetch-Site':'same-origin','Sec-Fetch-Mode':'cors','Sec-Fetch-Dest':'empty','Referer':'https://web.vodafone.com.eg/spa/portal/hub','Accept-Encoding':'gzip, deflate'}
 while True:
     r2 = requests.get("https://web.vodafone.com.eg/services/dxl/ramadanpromo/promotion?@type=RamadanHub&channel=website&msisdn="+number,headers=hd2)
-    s = (r2.json()[1]['pattern'])
+    try :
+    	s = (r2.json()[1]['pattern'])
+    except :
+    	print('🕧  \033[1;31mTry again Tomorrow')
+    	exit('\033[1;39m')
     for x in s:
         amount = (x['action'][0]['characteristics'][2]['value'])
         units = (x['action'][0]['characteristics'][1]['value'])
@@ -136,8 +140,14 @@ while True:
                 response3 = requests.post(url3, headers=headers3,json=payload3).json()
                 #print(response3['eDescription'])
                 if response3['eDescription'] == 'Success' :
-                	print(f'✅ \033[1;32mSuccessful Charging of \033[1;34m{units} \033[1;32mUnits ')
+                	print(f'\n\n✅ \033[1;32mSuccessful Charging of \033[1;34m{units} \033[1;32mUnits ')
                 	exit('\033[1;39m')
                 else :
-                	print('\033[1;31m❌ Error')
+                	print('\n\n\033[1;31m❌ Error')
                 	exit('\033[1;39m')
+    import sys
+    import time
+    for i in range(5):
+        sys.stdout.write('\r' +'⏳\033[1;34m Loading\033[1;39m  ' + '.' * i + '  ')
+        sys.stdout.flush()
+        time.sleep(0.09)

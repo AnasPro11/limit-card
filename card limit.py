@@ -148,6 +148,6 @@ while True:
     import sys
     import time
     for i in range(5):
-        sys.stdout.write('\r' +'⏳\033[1;34m Loading\033[1;39m  ' + '.' * i + '  ')
+        sys.stdout.write('\r' + '⏳\033[1;34m Loading\033[0m ' + '█' * (i * 3) + '▒' * ((4 - i) * 3))
         sys.stdout.flush()
         time.sleep(0.09)

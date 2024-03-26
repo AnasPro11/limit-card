@@ -1,3 +1,5 @@
+print('The script is now stopped') 
+exit() 
 try :
 	import requests
 except :
